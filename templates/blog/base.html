@@ -1,0 +1,49 @@
+<!doctype html>
+{% load staticfiles%}
+<html lang="en">
+<head>Blog</head>
+<!--Medium Style Editor-->
+<link rel="stylesheet" href="{% static css/blog.css%}">
+<!-- FONTS-->
+</head>
+<body class="loader">
+<nav class="navbar navbar-default">
+    <div class="container">
+        <ul class="nav navbar-nav">
+            <li><a class="navbar-brand bigbrand" href="{%url 'post_list'%}">My Blog</a></li>
+            <li><a class="navbar-brand bigbrand" href="{%url 'about'%}">About</a></li>
+            <li><a class="navbar-brand bigbrand" href="http://www.github.com">Github</a></li>
+            <li><a class="navbar-brand bigbrand" href="http://www.linkedin.com">LinkedIn</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            {% if user.is_authenticated %}
+            <li>
+                <a href="{% url 'post_new' %}">New Post</a>
+            </li>
+            <li>
+                <a href="{% url 'post_draft_list' %}">Draft Post</a>
+            </li>
+            <li>
+                <a href="{% url 'logout' %}">Logout</a>
+            </li>
+            <li>
+                <a>Welcome:{{user.username}}</a>
+            </li>
+            {% else %}
+            <li><a href="{% url 'login'%}" class="nav navbar-right"><span class="glyphicon glyphicon-user"></span></a></li>
+            {% endif %}
+        </ul>
+    </div>
+</nav>
+<div  class="content container">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="blog_posts">
+                {% block content%}
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
