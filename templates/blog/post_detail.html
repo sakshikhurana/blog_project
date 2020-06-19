@@ -16,7 +16,7 @@
 </a>
 {%endif%}
 <hr>
-<a href="{%url 'add_comment_to_post' pk=post.pk}" class="btn btn0primary btn-comment">Add Comment</a>
+<a href="{%url 'add_comments_to_post' pk=post.pk %}" class="btn btn-primary btn-comment">Add Comment</a>
 <div class="container">
     {% for comment in post.comments.all%}
     <hr>

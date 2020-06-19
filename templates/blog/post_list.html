@@ -7,7 +7,7 @@
         <div class="date">
             <p>Published Date: {{post.published_date|date:"D M Y"}}</p>
         </div>
-        <a href="{%url 'post_detail' pk=post.pk%}">Comments:{{post.approve_comments.count}}</a>
+        <a href="{%url 'post_detail' pk=post.pk%}">Comments:{{post.approved_comment.count}}</a>
     </div>
     {% empty %}
     <h1>No Posts yet.</h1>
