@@ -1,6 +1,6 @@
 from django import forms
 from blog.models import Post, Comments
-
+from django.contrib.auth.models import User
 
 class PostForm(forms.ModelForm):
     class Meta:
@@ -19,3 +19,7 @@ class CommentForm(forms.ModelForm):
         widgets = {'author': forms.Textarea(attrs={'class': 'editable medoum-editor-textarea'})}
 
 
+class SignupForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ('username', 'first_name', 'last_name', 'email', 'password')
