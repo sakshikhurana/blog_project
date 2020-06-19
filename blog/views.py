@@ -1,12 +1,12 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import (TemplateView, CreateView, ListView, DeleteView, DetailView, UpdateView)
 from blog.models import Post, Comments
-from .forms import PostForm,CommentForm
+from .forms import PostForm, CommentForm, SignupForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required
-
+from django.contrib.auth.models import User
 # Create your views here.
 
 class AboutView(TemplateView):
@@ -63,7 +63,7 @@ def add_comments_to_post(request, pk):
 @login_required
 def comment_approve(request, pk):
     comment = get_object_or_404(Comments, pk=pk)
-    comment.approve()
+    comment.    approve()
     return redirect('post_detail', pk=comment.post.pk)
 
 @login_required
@@ -78,3 +78,10 @@ def post_publish(request, pk):
     post = get_object_or_404(Post, pk=pk)
     post.publish()
     return redirect('post_detail', pk=pk)
+
+
+class Signup(CreateView):
+    model = User
+    form_class = SignupForm
+    redirect_field_name = 'blog/post_list.html'
+
