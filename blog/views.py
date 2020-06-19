@@ -23,7 +23,6 @@ class PostListView(ListView):
 
 class PostUpdateView(UpdateView):
     model = Post
-    fields = '__all__'
     form_class = PostForm
 
 
@@ -35,7 +34,7 @@ class CreatePostView(LoginRequiredMixin, CreateView):
 
 
 class PostDeleteView(LoginRequiredMixin, DeleteView):
-    mdoel = Post
+    model = Post
     success_url = reverse_lazy('post_list')
 
 

@@ -9,6 +9,8 @@
         </div>
         <a href="{%url 'post_detail' pk=post.pk%}">Comments:{{post.approve_comments.count}}</a>
     </div>
-{% endfor %}
+    {% empty %}
+    <h1>No Posts yet.</h1>
+    {% endfor %}
 </div>
 {% endblock %}
