@@ -4,6 +4,7 @@ from django.urls import reverse
 
 # Create your models here.
 
+
 class Post(models.Model):
     author = models.ForeignKey('auth.User', on_delete=models.CASCADE)
     title = models.CharField(max_length=20)
@@ -15,7 +16,7 @@ class Post(models.Model):
         self.published_date = timezone.now()
         self.save()
 
-    def approved_comments(self):
+    def approved_comment(self):
         return self.comments.filter(approved_comment=True)
 
     def __str__(self):
@@ -41,4 +42,3 @@ class Comments(models.Model):
 
     def get_absolute_url(self):
         return reverse('post_list')
-
