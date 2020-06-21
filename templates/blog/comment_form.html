@@ -3,8 +3,10 @@
 <h1>New Comment</h1>
 <form class="post-form" method="post">
     {%csrf_token%}
+
     {{form.as_p}}
     <button type="submit" class="save btn btn-default">Post Comment</button>
+    <a href="{% url 'post_list' %}"><button type="button" class="save btn btn-default">Cancel</button></a>
 </form>
 <script>var editor=new MediumEditor('editable');</script>
 {% endblock %}

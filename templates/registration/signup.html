@@ -2,9 +2,6 @@
 {% block content %}
 <div class="jumbotron">
     <h2>Signup: </h2>
-    {% if form.errors %}
-    <p>Your username/password already exists.</p>
-    {% endif %}
     <form action="{% url 'signup' %}" method="post">
         {% csrf_token %}
         {{form.as_p}}

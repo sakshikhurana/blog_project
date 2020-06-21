@@ -10,7 +10,7 @@
         <a href="{%url 'post_detail' pk=post.pk%}">Comments:{{post.approved_comment.count}}</a>
     </div>
     {% empty %}
-    <h1>No Posts yet.</h1>
+    <h1>No Draft Posts.</h1>
     {% endfor %}
 </div>
 {% endblock %}

@@ -63,7 +63,7 @@ def add_comments_to_post(request, pk):
 @login_required
 def comment_approve(request, pk):
     comment = get_object_or_404(Comments, pk=pk)
-    comment.    approve()
+    comment.approve()
     return redirect('post_detail', pk=comment.post.pk)
 
 @login_required
@@ -83,5 +83,5 @@ def post_publish(request, pk):
 class Signup(CreateView):
     model = User
     form_class = SignupForm
-    redirect_field_name = 'blog/post_list.html'
+    success_url = reverse_lazy('login')
 
