@@ -1,2 +1,3 @@
 .idea
+blog/migrations
 db.sqlite3
