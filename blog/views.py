@@ -1,21 +1,44 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import (TemplateView, CreateView, ListView, DeleteView, DetailView, UpdateView)
 from blog.models import Post, Comments
-from .forms import PostForm,CommentForm
+from .forms import PostForm, CommentForm, SignupForm
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required
-
+from django.contrib.auth.models import User
+from django.views.generic.edit import FormMixin
 # Create your views here.
 
 class AboutView(TemplateView):
     template_name = 'blog/about.html'
 
 
-class PostDetailView(DetailView):
+# class PostDetailView(DetailView):
+#     model = Post
+class PostDetailView(FormMixin, DetailView):
     model = Post
+    form_class = CommentForm
 
+    def get_success_url(self):
+        return reverse('post_detail', kwargs={'pk': self.object.id})
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['form'] = CommentForm()
+        return context
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        form = self.get_form()
+        if form.is_valid():
+            return self.form_valid(form)
+        else:
+            return self.form_invalid(form)
+
+    def form_valid(self, form):
+        form.save()
+        return super().form_valid(form)
 
 class PostListView(ListView):
     model = Post
@@ -23,7 +46,6 @@ class PostListView(ListView):
 
 class PostUpdateView(UpdateView):
     model = Post
-    fields = '__all__'
     form_class = PostForm
 
 
@@ -35,7 +57,7 @@ class CreatePostView(LoginRequiredMixin, CreateView):
 
 
 class PostDeleteView(LoginRequiredMixin, DeleteView):
-    mdoel = Post
+    model = Post
     success_url = reverse_lazy('post_list')
 
 
@@ -79,3 +101,10 @@ def post_publish(request, pk):
     post = get_object_or_404(Post, pk=pk)
     post.publish()
     return redirect('post_detail', pk=pk)
+
+
+class Signup(CreateView):
+    model = User
+    form_class = SignupForm
+    success_url = reverse_lazy('login')
+
