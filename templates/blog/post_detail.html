@@ -16,7 +16,18 @@
 </a>
 {%endif%}
 <hr>
-<a href="{%url 'add_comments_to_post' pk=post.pk %}" class="btn btn-primary btn-comment">Add Comment</a>
+<!--<a href="{%url 'add_comments_to_post' pk=post.pk %}" class="btn btn-primary btn-comment">Add Comment</a>-->
+
+<form class="post-form" method="post">
+    <h3>Leave a comment:</h3>
+    <br>
+    {%csrf_token%}
+    {{form.as_p}}
+    <button type="submit" class="save btn btn-default">Send</button>
+    <a href="{% url 'post_list' %}"><button type="button" class="save btn btn-default">Cancel</button></a>
+</form>
+<hr>
+<script>var editor=new MediumEditor('editable');</script>
 <div class="container">
     {% for comment in post.comments.all%}
     <hr>
@@ -31,7 +42,7 @@
     </a>
     {% endif %}
     <p>{{comment.text|safe|linebreaks}}</p>
-    <p>Posted by: {{comment.author}}</p>
+    <p>Posted by: {{comment.email}}</p>
     {% endif %}
     {%empty%}
     <p>No Comments</p>

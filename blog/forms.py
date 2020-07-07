@@ -14,8 +14,8 @@ class PostForm(forms.ModelForm):
 class CommentForm(forms.ModelForm):
     class Meta:
         model = Comments
-        fields = ('author', 'text')
-        widgets = {'author': forms.Textarea(attrs={'class': 'editable medium-editor-textarea'})}
+        fields = ('email', 'text')
+        widgets = {'email': forms.EmailInput(attrs={'class': 'editable medium-editor-textarea'})}
 
 
 class SignupForm(forms.ModelForm):
