@@ -25,12 +25,13 @@ class PostDetailView(FormMixin, DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['form'] = CommentForm()
+        context['form'] = CommentForm(initial={'post': context['post'].pk})
         return context
 
     def post(self, request, *args, **kwargs):
         self.object = self.get_object()
         form = self.get_form()
+        # form.fields['post'] = self.object
         if form.is_valid():
             return self.form_valid(form)
         else:

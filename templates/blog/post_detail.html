@@ -26,7 +26,6 @@
     <button type="submit" class="save btn btn-default">Send</button>
     <a href="{% url 'post_list' %}"><button type="button" class="save btn btn-default">Cancel</button></a>
 </form>
-<hr>
 <script>var editor=new MediumEditor('editable');</script>
 <div class="container">
     {% for comment in post.comments.all%}
@@ -45,6 +44,7 @@
     <p>Posted by: {{comment.email}}</p>
     {% endif %}
     {%empty%}
+    <hr>
     <p>No Comments</p>
 {% endfor%}
 </div>
