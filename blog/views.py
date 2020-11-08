@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from django.views.generic import (TemplateView, CreateView, ListView, DeleteView, DetailView, UpdateView)
+from django.views.generic import (TemplateView, CreateView, ListView, DeleteView, DetailView, UpdateView, RedirectView)
 from blog.models import Post, Comments
 from .forms import PostForm, CommentForm, SignupForm
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -84,6 +84,7 @@ def add_comments_to_post(request, pk):
         form = CommentForm()
     return render(request, 'blog/comment_form.html', {'form': form})
 
+
 @login_required
 def comment_approve(request, pk):
     comment = get_object_or_404(Comments, pk=pk)
@@ -108,4 +109,3 @@ class Signup(CreateView):
     model = User
     form_class = SignupForm
     success_url = reverse_lazy('login')
-

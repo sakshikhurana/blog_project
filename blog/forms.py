@@ -8,7 +8,7 @@ class PostForm(forms.ModelForm):
         model = Post
         fields = ('author', 'title', 'text')
         widgets = {'title': forms.TextInput(attrs={'class': 'textinputclass'}), 'text': forms.Textarea(attrs={'class':
-                   'editable medium-editor-textarea post-content'})}
+                                                                                                              'editable medium-editor-textarea post-content'})}
 
 
 class CommentForm(forms.ModelForm):
@@ -16,11 +16,12 @@ class CommentForm(forms.ModelForm):
         model = Comments
         fields = ('email', 'text', 'post')
         widgets = {'email': forms.EmailInput(attrs={'class': 'editable medium-editor-textarea'}),
-                    'post': forms.HiddenInput()}
+                   'post': forms.HiddenInput()}
 
 
 class SignupForm(forms.ModelForm):
     confirm_password = forms.CharField(widget=forms.PasswordInput())
+
     class Meta:
         model = User
         fields = ['username', 'first_name', 'last_name', 'email', 'password']
@@ -34,5 +35,5 @@ class SignupForm(forms.ModelForm):
         password = cleaned_data['password']
         confirm_password = cleaned_data['confirm_password']
         if password != confirm_password:
-            raise forms.ValidationError('Password and Confirm Password does not match.')
-
+            raise forms.ValidationError(
+                'Password and Confirm Password does not match.')
