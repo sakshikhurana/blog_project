@@ -23,9 +23,9 @@ TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
 SECRET_KEY = '78fmwza_nek^aqezh%#6&8)l#4^g5m$-sl^&hhmk^$m+w+^+%g'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["sakshikhurana.pythonanywhere.com"]
 
 
 # Application definition
@@ -122,4 +122,8 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
+try:
+    from .local_settings import *
+except ImportError:
+    print("File in production")
 
